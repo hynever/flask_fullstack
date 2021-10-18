@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>知了聊天室</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.1.3/socket.io.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/art-template/4.13.2/lib/template-web.min.js"></script>
+  <script src="/static/index.js"></script>
+  <style>
+    *{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    html{
+      height: 100%;
+    }
+    body{
+      height: 100%;
+      background: url("/static/bg.jpg") no-repeat 100% 100%;
+    }
+    .main{
+      width: 800px;
+      margin: 0 auto;
+    }
+    .chat-container{
+      height: 590px;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .chat-list-group{
+      background-color: #ffffff;
+      width: 200px;
+      border-right: 1px solid #cccccc;
+    }
+    .chat-group{
+      background-color: #ffffff;
+      flex: 1;
+    }
+    .module-title{
+      height: 40px;
+      line-height: 40px;
+      padding-left: 10px;
+      font-weight: 700;
+      border-bottom: 1px solid #ccc;
+    }
+    .list-group{
+      height: 549px;
+      overflow-y: scroll;
+    }
+    .list-group .list-group-item{
+      padding: 0 10px;
+      border-bottom: 1px solid #ccc;
+      height: 60px;
+      line-height: 60px;
+      box-sizing: border-box;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      cursor: pointer;
+    }
+    .chat-box{
+      height: 340px;
+      background-color: #ffffff;
+      padding: 10px;
+      overflow-y: scroll;
+      border-bottom: 1px solid #cccccc;
+    }
+    .chat-content-box{
+      margin-bottom: 10px;
+      overflow-y: hidden;
+      display: flex;
+      justify-items: center;
+      padding: 5px;
+    }
+    .chat-content{
+      background-color: #ccc;
+      padding: 5px;
+    }
+    .username{
+      padding: 5px;
+    }
+    .friend{}
+    .me{
+      justify-content: right;
+    }
+    .chat-input-group{
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .chat-input-group .chat-textarea{
+      display: block;
+      width: 100%;
+      height: 120px;
+      outline: none;
+      border: none;
+      resize: none;
+    }
+    .button{
+      display: inline-block;
+      width: 80px;
+      height: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<script type="text/html" id="chat-list-template">
+  {% raw %}
+    {{ each chats }}
+      <li class="list-group-item">【私】{{ $value.name }}</li>
+    {{ /each }}
+  {% endraw %}
+</script>
+<script type="text/html" id="group-list-template">
+{% raw %}
+  {{ each groups }}
+    <li class="list-group-item">【群】{{ $value.name }}</li>
+  {% endraw %}
+</script>
+<script type="text/html" id="chat-content-template">
+{% raw %}
+  {{ if from_user=="me" }}
+    <li class="chat-content-box me">
+      <div class="friend chat-content">{{ message }}</div>
+      <div class="username">：我</div>
+    </li>
+  {{ else }}
+    <li class="chat-content-box">
+      <div class="username">{{ from_user }}：</div>
+      <div class="friend chat-content">{{ message }}</div>
+    </li>
+  {{ /if }}
+{% endraw %}
+</script>
+<body>
+  <div class="main" style="padding-top: 100px;">
+    <div class="chat-container">
+      <div class="chat-list-group">
+        <div class="module-title">聊天列表</div>
+        <ul class="list-group" id="chat-ul">
+        </ul>
+      </div>
+      <div class="chat-group">
+        <div class="module-title">聊天窗口</div>
+        <div class="chat-box">
+          <ul class="chat-list-box" id="chat-list-box">
+          </ul>
+        </div>
+        <div class="chat-input-group">
+          <textarea name="chat-content" placeholder="请输入聊天内容..." id="chat-textarea" class="chat-textarea"></textarea>
+          <div class="button-group" style="text-align: right;">
+            <button class="button" id="create-room-button">创建群聊</button>
+            <button class="button" id="send-button">发送</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

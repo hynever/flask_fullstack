@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>注册</title>
+</head>
+<body>
+    <form action="{{ url_for('register') }}" method="POST">
+        <table>
+            <tr>
+              <td></td>
+              <td><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"></td>
+            </tr>
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td><input type="email" name="email"></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td>确认密码：</td>
+                <td><input type="password" name="confirm_password"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="提交"></td>
+            </tr>
+        </table>
+        <ul>
+          {% for message in get_flashed_messages() %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+    </form>
+</body>
+</html>

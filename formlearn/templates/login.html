@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+</head>
+<body>
+<form action="" method="POST">
+  <table>
+    <tbody>
+      <tr>
+        <td></td>
+        <td>{{ form.csrf_token }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.email.label }}</td>
+        <td>{{ form.email }}</td>
+      </tr>
+      {% for error in form.email.errors %}
+        <tr>
+          <td></td>
+          <td>{{ error }}</td>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td>{{ form.password.label }}</td>
+        <td>{{ form.password }}</td>
+      </tr>
+      {% for error in form.password.errors %}
+        <tr>
+          <td></td>
+          <td>{{ error }}</td>
+        </tr>
+      {% endfor %}
+      <tr>
+        <td>{{ form.remember.label }}</td>
+        <td>{{ form.remember() }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>{{ form.submit }}</td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+</body>
+</html>
