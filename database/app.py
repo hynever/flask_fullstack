@@ -72,7 +72,7 @@ class Category(db.Model):
     __tablename__ = "category"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100))
-    newses = db.relationship("News",back_populates="category",cascade="delete-orphan")
+    newses = db.relationship("News",back_populates="category",cascade="merge")
 
 
 class News(db.Model):
@@ -81,7 +81,7 @@ class News(db.Model):
     title = db.Column(db.String(100))
     content = db.Column(db.Text)
     category_id = db.Column(db.Integer,db.ForeignKey("category.id"))
-    category = db.relationship("Category",back_populates="newses")
+    category = db.relationship("Category",back_populates="newses", cascade="expunge")
 
 
 # db.create_all()
@@ -231,7 +231,7 @@ def one2one():
 @app.route('/many2many')
 def many2many():
     article1 = Article(title="11",content="aa")
-    article2 = Article(title="11", content="aa")
+    article2 = Article(title="22", content="bb")
 
     tag1 = Tag(name="python")
     tag2 = Tag(name="flask")
@@ -275,6 +275,35 @@ def delete_orphan_view():
     category.newses.remove(news)
     db.session.commit()
     return "success"
+
+
+@app.route("/merge")
+def merge_view():
+    news1 = News.query.first()
+
+    category = Category(name="分类2")
+    news2 = News(title="标题2", category=category)
+
+    # 将news2.id设置为news1.id，在merge的时候就会根据news2的id去寻找需要merge的对象
+    # 这里需要merge的就是news1，然后将news2上和news1上不同的数据复制到news1上
+    news2.id = news1.id
+    db.session.merge(news2)
+    db.session.commit()
+
+    return "新闻合并成功"
+
+
+@app.route("/expunge")
+def expunge_view():
+    news = News.query.first()
+    category = news.category
+
+    db.session.expunge(news)
+    category.name = '测试分类'
+    db.session.commit()
+
+    return "expunge success"
+
 
 
 if __name__ == '__main__':
