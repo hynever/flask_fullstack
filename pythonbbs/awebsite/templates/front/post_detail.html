@@ -1,0 +1,53 @@
+{% extends 'front/base.html' %}
+
+{% block title %}
+  帖子标题
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static',filename='front/css/post_detail.css') }}">
+{% endblock %}
+
+{% block body %}
+  <div class="lg-container">
+    <div class="post-container">
+      <h2>钢铁是怎样炼成的</h2>
+      <p class="post-info-group">
+        <span>发表时间：2021-10-01</span>
+        <span>作者：张三</span>
+        <span>所属板块：Python基础</span>
+        <span>阅读数：20</span>
+        <span>评论数：10</span>
+      </p>
+      <article class="post-content" id="post-content">
+        帖子内容
+      </article>
+    </div>
+    <div class="comment-group">
+      <h3>评论列表</h3>
+      <ul class="comment-list-group">
+        <li>
+          <div class="comment-content">
+            <p class="author-info">
+              <span>张三</span>
+              <span>2021-10-01</span>
+            </p>
+            <p class="comment-txt">
+              评论内容
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="add-comment-group">
+      <h3>发表评论</h3>
+      <form action="" method="post">
+        <textarea class="form-control" name="content" id="editor" cols="30" rows="5"></textarea>
+        <div class="comment-btn-group">
+          <button class="btn btn-primary" id="comment-btn">发表评论</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="sm-container"></div>
+{% endblock %}

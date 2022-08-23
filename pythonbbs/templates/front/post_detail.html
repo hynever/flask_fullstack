@@ -1,0 +1,63 @@
+{% extends 'front/base.html' %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static',filename='front/css/post_detail.css') }}">
+{% endblock %}
+
+{% block body %}
+  <div class="lg-container">
+    <div class="post-container">
+      <h2>{{ post.title }}</h2>
+      <p class="post-info-group">
+        <span>发表时间：{{ post.create_time }}</span>
+        <span>作者：<a href="{{ url_for('user.profile',user_id=post.author.id) }}">{{ post.author.username }}</a></span>
+        <span>所属板块：{{ post.board.name }}</span>
+        <span>阅读数：{{ post.read_count }}</span>
+        <span>评论数：{{ post.comments.count() }}</span>
+      </p>
+      <article class="post-content" id="post-content">
+        {{ post.content|safe }}
+      </article>
+    </div>
+    <div class="comment-group">
+      <h3>评论列表</h3>
+      <ul class="comment-list-group">
+        {% for comment in post.comments.filter_by(is_active=True) %}
+          <li>
+            <div class="comment-content">
+              <p class="author-info">
+                <span>{{ comment.author.username }}</span>
+                <span>{{ comment.create_time }}</span>
+              </p>
+              <p class="comment-txt">
+                {{ comment.content }}
+              </p>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="add-comment-group">
+      <h3>发表评论</h3>
+      <form action="{{ url_for('front.public_comment',post_id=post.id) }}" method="post">
+        <textarea class="form-control" name="content" id="editor" cols="30" rows="5"></textarea>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {% with messages = get_flashed_messages()  %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="text-danger mt-2">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="comment-btn-group">
+          <button class="btn btn-primary" id="comment-btn">发表评论</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="sm-container"></div>
+{% endblock %}

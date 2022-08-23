@@ -1,0 +1,36 @@
+{% extends "front/base.html" %}
+
+{% block title %}知了Python论坛{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static',filename='front/css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+  <div class="lg-container">
+    <div class="post-group">
+      <ul class="post-list-group">
+        <li>
+          <div class="post-info-group">
+            <p class="post-title">
+              <a href="#">钢铁是怎样炼成的</a>
+            </p>
+            <p class="post-info">
+              <span>作者: 张三</span>
+              <span>发表时间:2021-10-01</span>
+              <span>评论:0</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="sm-container">
+    <div style="padding-bottom:10px;">
+      <a href="{{ url_for("front.public_post") }}" class="btn btn-warning btn-block">发布帖子</a>
+    </div>
+    <div class="list-group">
+      <a href="/" class="list-group-item active">所有板块</a>
+    </div>
+  </div>
+{% endblock %}

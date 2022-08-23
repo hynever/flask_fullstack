@@ -1,0 +1,43 @@
+{% extends 'cms/base.html' %}
+
+{% block title %}帖子管理{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static',filename='cms/js/posts.js') }}"></script>
+{% endblock %}
+
+{% block page_title %}
+  {{ self.title() }}
+{% endblock %}
+
+{% block main_content %}
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>标题</th>
+      <th>发布时间</th>
+      <th>板块</th>
+      <th>作者</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for post in posts %}
+      <tr>
+        <td><a target="_blank" href="{{ url_for("front.post_detail",post_id=post.id) }}">{{ post.title }}</a></td>
+        <td>{{ post.create_time }}</td>
+        <td>{{ post.board.name }}</td>
+        <td>{{ post.author.username }}</td>
+        <td>
+          {% if post.is_active %}
+            <button class="btn btn-danger btn-sm active-btn" data-active="1" data-post-id="{{ post.id }}">隐藏</button>
+          {% else %}
+            <button class="btn btn-info btn-sm active-btn" data-active="0" data-post-id="{{ post.id }}">取消隐藏</button>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock %}

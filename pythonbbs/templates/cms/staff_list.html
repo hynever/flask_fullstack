@@ -1,0 +1,43 @@
+{% extends 'cms/base.html' %}
+
+{% block title %}员工管理{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block page_title %}
+  {{ self.title() }}
+{% endblock %}
+
+{% block main_content %}
+  <a href="{{ url_for('cms.add_staff') }}" class="btn btn-primary mb-3">添加员工</a>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>邮箱</th>
+      <th>用户名</th>
+      <th>加入时间</th>
+      <th>角色</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.join_time }}</td>
+        <td>{{ user.role.name }}</td>
+        <td>
+          {% if not user.has_permission(PermissionEnum.CMS_USER) %}
+            <a href="{{ url_for('cms.edit_staff',user_id=user.id) }}" class="btn btn-info btn-sm">编辑</a>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

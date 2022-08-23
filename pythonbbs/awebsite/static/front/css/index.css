@@ -1,0 +1,79 @@
+.index-banner{
+    border-radius: 10px;
+    overflow: hidden;
+    height: 200px;
+}
+
+.index-banner img{
+    height: 200px;
+}
+
+.carousel-control-prev, .carousel-control-next{
+    background-color: rgba(0,0,0,0);
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover{
+    background-color: rgba(1,1,1,0.1);
+}
+
+.post-group{
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.post-group-head{
+    overflow: hidden;
+    list-style: none;
+}
+
+.post-group-head li{
+    float: left;
+    padding: 5px 10px;
+}
+
+.post-group-head li a{
+    color:#333;
+}
+
+.post-group-head li.active{
+    background: #ccc;
+}
+
+.post-list-group{
+    margin-top: 20px;
+}
+
+.post-list-group li{
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.author-avatar-group{
+    float: left;
+}
+
+.author-avatar-group img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.post-info-group{
+    float: left;
+    border-bottom: 1px solid #e6e6e6;
+    width: 85%;
+    padding-bottom: 10px;
+}
+
+.post-info-group .post-info{
+    margin-top: 10px;
+    font-size: 12px;
+    color: #8c8c8c;
+}
+
+.post-info span{
+    margin-right: 10px;
+}

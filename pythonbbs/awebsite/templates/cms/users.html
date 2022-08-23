@@ -1,0 +1,42 @@
+{% extends 'cms/base.html' %}
+
+{% block title %}用户管理{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static',filename='cms/js/users.js') }}"></script>
+{% endblock %}
+
+{% block page_title %}
+  {{ self.title() }}
+{% endblock %}
+
+{% block main_content %}
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>邮箱</th>
+      <th>用户名</th>
+      <th>加入时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.join_time }}</td>
+        <td>
+          {% if user.is_active %}
+            <button class="btn btn-danger btn-sm active-btn" data-active="1" data-user-id="{{ user.id }}">禁用</button>
+          {% else %}
+            <button class="btn btn-info btn-sm active-btn" data-active="0" data-user-id="{{ user.id }}">取消禁用</button>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

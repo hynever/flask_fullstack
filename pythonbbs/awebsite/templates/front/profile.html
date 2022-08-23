@@ -1,0 +1,44 @@
+{% extends 'front/base.html' %}
+
+{% block title %}
+  张三个人中心
+{% endblock %}
+
+{% block head %}
+  <style>
+  .profile-box{
+    width: 400px;
+    margin: 0 auto;
+  }
+  .avatar{
+    width: 200px;
+  }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <div class="profile-box">
+  <h1 style="text-align: center;">张三个人中心</h1>
+    <table class="table table-bordered mt-5">
+      <tbody>
+        <tr>
+          <th width="100px">用户名：</th>
+          <td>张三</td>
+        </tr>
+        <tr>
+          <th>头像：</th>
+          <td>
+            <img class="avatar" src="https://pic1.zhimg.com/80/v2-d03aa05346fd377da12dc324d79acda3_720w.jpg" alt="">
+          </td>
+        </tr>
+        <tr>
+          <th>签名：</th>
+          <td>我就是我，不一样的烟火！</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="text-align: center;">
+      <button class="btn btn-primary">保存</button>
+    </div>
+  </div>
+{% endblock %}

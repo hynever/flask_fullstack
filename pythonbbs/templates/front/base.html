@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static',filename='common/zlajax.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='front/css/base.css') }}">
+  <title>{% block title %}{% endblock %}</title>
+  {% block head %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">知了Python论坛</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="请输入关键字" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+    </form>
+    <ul class="navbar-nav ml-4">
+      {% if g.user %}
+        {% if g.user.is_staff %}
+          <li class="nav-item">
+            <a href="{{ url_for('cms.index') }}" class="nav-link">管理系统</a>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <a href="{{ url_for('user.profile',user_id=g.user.id) }}" class="nav-link">{{ g.user.username }}</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for("user.logout") }}" class="nav-link">退出登录</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.login') }}">登录</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user.register') }}">注册</a>
+        </li>
+      {% endif %} 
+    </ul>
+  </div>
+</nav>
+<div class="main-container">
+  {% block body %}{% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'cms/base.html' %}
+
+{% block title %}CMS用户管理{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block page_title %}
+  {{ self.title() }}
+{% endblock %}
+
+{% block main_content %}
+  <a href="#" class="btn btn-primary mb-3">添加员工</a>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>邮箱</th>
+      <th>用户名</th>
+      <th>加入时间</th>
+      <th>角色</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>1</td>
+      <td>hynever@163.com</td>
+      <td>张三</td>
+      <td>2021-10-10</td>
+      <td>运营</td>
+      <td>
+        <a href="#" class="btn btn-info btn-sm">编辑</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+{% endblock %}

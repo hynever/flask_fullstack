@@ -1,0 +1,27 @@
+body{
+    background: #f3f3f3;
+}
+.outer-box{
+    width: 854px;
+    background: #fff;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.page-title{
+    padding-top: 50px;
+    text-align: center;
+}
+.sign-box{
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.captcha-addon{
+    padding: 0;
+    overflow: hidden;
+}
+.captcha-img{
+    width: 94px;
+    height: 32px;
+    cursor: pointer;
+}

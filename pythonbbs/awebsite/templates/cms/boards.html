@@ -1,0 +1,44 @@
+{% extends 'cms/base.html' %}
+
+{% block title %}板块管理{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static',filename='cms/js/boards.js') }}"></script>
+{% endblock %}
+
+{% block page_title %}
+  {{ self.title() }}
+{% endblock %}
+
+{% block main_content %}
+  <div class="top-box">
+    <button class="btn btn-primary" style="float:right;" id="add-board-btn">添加新板块</button>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>板块名称</th>
+      <th>帖子数量</th>
+      <th>创建时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for board in boards %}
+      <tr data-name="{{ board.name }}" data-id="{{ board.id }}">
+        <td>{{ board.name }}</td>
+        <td>{{ board.posts|length }}</td>
+        <td>{{ board.create_time }}</td>
+        <td>
+          <button class="btn btn-default btn-sm edit-board-btn" data-board-id="{{ board.id }}"
+                  data-board-name="{{ board.name }}">编辑
+          </button>
+          <button class="btn btn-danger btn-sm delete-board-btn" data-board-id="{{ board.id }}"
+                  data-board-name="{{ board.name }}">删除
+          </button>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "front/base.html" %}
+
+{% block title %}
+  发布帖子
+{% endblock %}
+
+{% block head %}
+  <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
+  <script src="{{ url_for('static',filename='front/js/public_post.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <h1 style="text-align: center;">发布帖子</h1>
+  <div class="mb-4"></div>
+  <form action="" method="post">
+    <div class="form-group">
+      <label>标题</label>
+      <input type="text" class="form-control" name="title">
+    </div>
+    <div class="form-group">
+      <label>板块</label>
+      <select name="board_id" class="form-control">
+        {% for board in boards %}
+          <option value="{{ board.id }}">{{ board.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>内容</label>
+      <div id="editor"></div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-danger" id="submit-btn">发布帖子</button>
+    </div>
+  </form>
+{% endblock %}

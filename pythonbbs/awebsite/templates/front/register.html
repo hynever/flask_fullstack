@@ -1,0 +1,44 @@
+{% extends 'front/base.html' %}
+
+{% block title %}
+  知了课堂注册
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static',filename='front/css/sign.css') }}">
+{% endblock %}
+
+{% block body %}
+  <h1 class="page-title">注册</h1>
+  <div class="sign-box">
+    <form action="" id="register-form">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" class="form-control" name="email" placeholder="邮箱">
+          <div class="input-group-append">
+            <button id="captcha-btn" class="btn btn-outline-secondary">发送验证码</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="email_captcha" placeholder="邮箱验证码">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="username" placeholder="用户名">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="password" placeholder="密码">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="confirm_password" placeholder="确认密码">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-warning btn-block" id="submit-btn">立即注册</button>
+      </div>
+      <div class="form-group">
+        <a href="#" class="signup-link">返回登陆</a>
+        <a href="#" class="resetpwd-link" style="float:right;">找回密码</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

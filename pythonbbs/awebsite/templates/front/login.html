@@ -1,0 +1,35 @@
+{% extends 'front/base.html' %}
+
+{% block title %}
+  登录
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static',filename='front/css/sign.css') }}">
+{% endblock %}
+
+{% block body %}
+  <h1 class="page-title">登录</h1>
+  <div class="sign-box">
+    <form action="" method="post">
+      <div class="form-group">
+        <input type="text" class="form-control" name="email" placeholder="邮箱">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="password" placeholder="密码">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="remember" value="1">记住我
+        </label>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-warning btn-block" id="submit-btn">立即登录</button>
+      </div>
+      <div class="form-group">
+        <a href="#" class="signup-link">没有账号？立即注册</a>
+        <a href="#" class="resetpwd-link" style="float:right;">找回密码</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
